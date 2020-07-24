@@ -1,0 +1,47 @@
+# Git指令精简手册
+
+- 初始化一个Git仓库，`git init`。
+- 添加文件到Git仓库，分两步：
+    - `git add <file>`，可反复多次使用，添加多个文件。
+    - `git commit -m '<you message>'`。
+- 查看状态，`git status`。
+- 查看文件修改情况，`git diff <file>`。
+    - 比较文件历史版本修改，`git diff version1:filename version2:filename`
+- 查看历史记录，`git log`, 还可以加上`--pretty=oneline`参数简化输出。
+    - 查看文件历史记录，`git log filename`
+- 重置到任一版本，`git reset --hard <commit id>`，回到上一个版本，`commit id`可写为`HEAD^`，上上个版本则为`HEAD^^`,向上N个版本则可写为`HEAD~N`。
+- 查看git命令历史，`git reflog`。
+- 放弃工作区文件修改，`git checkout -- <file>`，注意`--`不可少。
+- 放弃工作区文件修改，但是已提交之暂存区，可先使用`git reset HEAD <file>`回到最新已提交的版本，然后再使用`git checkout -- <file>`。
+- 删除一个文件，`git rm <file>`。
+- 关联一个远程库，`git remote add origin git@server-name:path/repo-name.git`，此处`orign`作为远程库的名字。
+- 第一次推送master分支的所有内容到远程库，`git push -u origin master`。
+- 非第一次的推送最新修改，`git push origin master`。
+- 克隆一个远程仓库，`git clone <repository address>`。
+- 查看分支，`git branch`。
+- 创建分支，`git branch <name>`。
+- 切换分支,`git checkout <name>`。
+- 创建+切换分支，`git checkout -b <name>`。
+- 合并某分支到当前分支，`git merge <name>`。
+- 删除分支，`git branch -d <name>`。
+- 查看分支合并图，`git log --graph`，更精简的命令`git log --graph --pretty=oneline --abbrev-commit`。
+- 合并分支时，加上`--no-ff`参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而`fast forward`合并就看不出来曾经做过合并。
+- 储存工作现场，`git stash`。
+- 查看已储存工作现场，`git stash list`。
+- 恢复工作现场但不删除已储存的`stash`，`git stash apply`。
+- 恢复工作现场且删除已储存的`stash`，`git stash pop`。
+- 强行删除未合并的分支，`git branch -D <name>`。
+- 查看远程库信息，使用`git remote -v`。
+- 从本地推送分支，使用`git push origin branch-name`，如果推送失败，先用`git pull`抓取远程的新提交， 本地新建的分支如果不推送到远程，对其他人就是不可见的。
+- 在本地创建和远程分支对应的分支，使用`git checkout -b branch-name origin/branch-name`，本地和远程分支的名称最好一致。
+- 建立本地分支和远程分支的关联，使用`git branch --set-upstream branch-name origin/branch-name`。
+- 从远程抓取分支，使用`git pull`，如果有冲突，要先处理冲突。
+- 新建一个标签，`git tag <name> <commit id>`，无`commit id`则默认为`HEAD`，可以指定标签信息，`git tag -a <tagname> -m "blablabla..."`，可以用PGP签名标签，`git tag -s <tagname> -m "blablabla..."`。
+- 查看所有标签，`git tag`。
+- 推送一个本地标签，`git push origin <tagname>`。
+- 推送全部未推送过的本地标签，`git push origin --tags`。
+- 删除一个本地标签，`git tag -d <tagname>`。
+- 删除一个远程标签，需要先删除本地标签，然后从远程删除，`git push origin :refs/tags/<tagname>`。
+- 让Git显示颜色，`git config --global color.ui true`。
+- 忽略某些文件时，需要编写`.gitignore`文件，`.gitignore`文件本身要放到版本库里，并且可以对`.gitignore`做版本管理。
+- 配置别名，例如`git config --global alias.st status`，表示用`st`作为`status`的别名。
