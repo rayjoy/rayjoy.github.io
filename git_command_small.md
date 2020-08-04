@@ -1,5 +1,7 @@
 # Git指令精简手册
 
+[主页](rayjoy.github.io)
+
 - 初始化一个Git仓库，`git init`。
 - 添加文件到Git仓库，分两步：
     - `git add <file>`，可反复多次使用，添加多个文件。
